@@ -8,6 +8,8 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,19 +22,19 @@ public class Main {
         Main main = new Main();
 
         /*
-        * Endereço do arquivo no disco.
+        * Endereï¿½o do arquivo no disco.
         * */
-        String filePath = "C:\\Users\\Diego\\Documents\\BusaoBV\\horarios";
-        String fileName = "horarios_formatados_old.xls";
+        String filePath = main.selectFile();
 
         /*
         * Instanceando o arquivo para leitura.
         * */
-        FileInputStream fileIS = new FileInputStream(new File(filePath+"\\"+fileName));
+        FileInputStream fileIS = new FileInputStream(new File(filePath));
         POIFSFileSystem fs = new POIFSFileSystem(fileIS);
 
+
         /*
-        * Transforma o arquivo em um documento, compatível com a bibiblioteca.
+        * Transforma o arquivo em um documento, compatï¿½vel com a bibiblioteca.
         * */
         HSSFWorkbook workbook = new HSSFWorkbook(fs);
 
@@ -53,17 +55,17 @@ public class Main {
         * 'for' que vai percorrer todas as planilhas do documento
         * */
         for(int i = 0; i < qtdSheets-1; i++){
-            // Um objeto linha é instanceado a cada iteração para que seja adicionado a lista de linhas
+            // Um objeto linha ï¿½ instanceado a cada iteraï¿½ï¿½o para que seja adicionado a lista de linhas
             Linha linha = new Linha();
 
-            // Instancia a planilha que será lida na iteração.
+            // Instancia a planilha que serï¿½ lida na iteraï¿½ï¿½o.
             HSSFSheet sheet = workbook.getSheetAt(i);
 
             // obtem a quantidade  de linhas que tem na planilha.
             int qtdRows = sheet.getPhysicalNumberOfRows();
 
             /*
-            * Preenche os campos de nome e número do objeto linha.
+            * Preenche os campos de nome e nï¿½mero do objeto linha.
             * */
             HSSFRow rowInfo = sheet.getRow(0);
             HSSFCell cellNumero = rowInfo.getCell(0);
@@ -72,21 +74,21 @@ public class Main {
             linha.setNumero((int) cellNumero.getNumericCellValue());
 
             /*
-            * Percorre todas as linhas a partir da primeira linha com informações que precisam ser lidas no
+            * Percorre todas as linhas a partir da primeira linha com informaï¿½ï¿½es que precisam ser lidas no
             * documento.
             * */
             for (int j = 4; j < qtdRows; j++){
                 HSSFRow row = sheet.getRow(j);
 
                 /*
-                * A partir daqui, o programa lê linha por linha e adciona cada informação em suas listas de acordo com
-                * o número de sua coluna.
-                * As colunas no excel são representadas por letras, mas no programa, por número de 0 a 'n'.
-                * Por exemplo, a coluna A, primeira coluna, na qual contém as informações do Horario de saida do bairro nos dias uteis
-                * é representado aqui pelo numero 0 (zero).
+                * A partir daqui, o programa lï¿½ linha por linha e adciona cada informaï¿½ï¿½o em suas listas de acordo com
+                * o nï¿½mero de sua coluna.
+                * As colunas no excel sï¿½o representadas por letras, mas no programa, por nï¿½mero de 0 a 'n'.
+                * Por exemplo, a coluna A, primeira coluna, na qual contï¿½m as informaï¿½ï¿½es do Horario de saida do bairro nos dias uteis
+                * ï¿½ representado aqui pelo numero 0 (zero).
                 * */
 
-                // Horários de saída do BAIRRO nos DIAS ÚTEIS.
+                // Horï¿½rios de saï¿½da do BAIRRO nos DIAS ï¿½TEIS.
                 try {
                     Cell cell = row.getCell(0, Row.CREATE_NULL_AS_BLANK);
 
@@ -98,7 +100,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Horários de saída do CENTRO nos DIAS ÚTEIS.
+                // Horï¿½rios de saï¿½da do CENTRO nos DIAS ï¿½TEIS.
                 try {
                     Cell cell = row.getCell(1, Row.CREATE_NULL_AS_BLANK);
 
@@ -109,7 +111,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Horários de saída do BAIRRO nos SABADOS.
+                // Horï¿½rios de saï¿½da do BAIRRO nos SABADOS.
                 try {
                     Cell cell = row.getCell(2, Row.CREATE_NULL_AS_BLANK);
 
@@ -120,7 +122,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Horários de saída do CENTRO nos SABADOS.
+                // Horï¿½rios de saï¿½da do CENTRO nos SABADOS.
                 try {
                     Cell cell = row.getCell(3, Row.CREATE_NULL_AS_BLANK);
 
@@ -131,7 +133,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Horários de saída do BAIRRO nos DOMINGOS.
+                // Horï¿½rios de saï¿½da do BAIRRO nos DOMINGOS.
                 try {
                     Cell cell = row.getCell(4, Row.CREATE_NULL_AS_BLANK);
 
@@ -142,7 +144,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Horários de saída do BAIRRO nos DOMINGOS.
+                // Horï¿½rios de saï¿½da do BAIRRO nos DOMINGOS.
                 try {
                     Cell cell = row.getCell(5, Row.CREATE_NULL_AS_BLANK);
 
@@ -153,7 +155,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Itinerário de saída do BAIRRO.
+                // Itinerï¿½rio de saï¿½da do BAIRRO.
                 try {
                     Cell cell = row.getCell(6, Row.CREATE_NULL_AS_BLANK);
 
@@ -164,7 +166,7 @@ public class Main {
                     System.out.println("Erro: "+ e.toString());
                 }
 
-                // Itinerário de saída do CENTRO.
+                // Itinerï¿½rio de saï¿½da do CENTRO.
                 try {
                     Cell cell = row.getCell(7, Row.CREATE_NULL_AS_BLANK);
 
@@ -177,14 +179,13 @@ public class Main {
             }
 
             /*
-            * Aqui o objeto totalmente populado com as informações lidas da planilha é adicionado a lista.
+            * Aqui o objeto totalmente populado com as informaï¿½ï¿½es lidas da planilha ï¿½ adicionado a lista.
             **/
             linhas.add(linha);
         }
 
         return linhas;
     }
-
 
     public void imprimeLinhas(List<Linha> linhas){
         for (Linha linha : linhas){
@@ -252,7 +253,6 @@ public class Main {
         }
     }
 
-
     public String getHHMMFormat(double value){
         double time = value * 24;
         int hours = (int) time;
@@ -283,7 +283,7 @@ public class Main {
             for (String rua : ruas){
                 if (rua.contains(cell.getStringCellValue())){
                     verifica = false;
-                    System.out.println("Não add: "+rua+" - "+cell.getStringCellValue());
+                    System.out.println("Nï¿½o add: "+rua+" - "+cell.getStringCellValue());
                 }
             }
 
@@ -297,5 +297,21 @@ public class Main {
         return ruas;
     }
 
+    public String selectFile(){
+        String filePath = null;
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "Arquivos do Excel", "xls", "xlsx");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().getAbsolutePath());
+            filePath = chooser.getSelectedFile().getAbsolutePath();
+        }
+
+        return filePath;
+    }
 
 }
