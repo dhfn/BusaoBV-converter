@@ -20,3 +20,4 @@ Formatação do arquivo XLS.
 O arquivo XLS, deve estar com essa formatação, contando da célula A1.
 As informações destacadas com "[" "]" (colchetes) devem ser substituidas pelos dados pertinentes.
 As células sem colchetes podem ficar em branco, só servem para identificação na visualização.
+
